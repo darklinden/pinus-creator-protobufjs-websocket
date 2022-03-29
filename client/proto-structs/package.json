@@ -1,0 +1,12 @@
+{
+    "name": "proto-structs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "author": "",
+    "dependencies": {
+        "long": "4.0.0",
+        "protobufjs": "6.8.8"
+    }
+}

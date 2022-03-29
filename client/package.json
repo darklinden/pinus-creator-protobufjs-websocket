@@ -1,0 +1,24 @@
+{
+  "name": "common",
+  "uuid": "29082421-9b56-4802-9164-b740c48fafce",
+  "version": "3.4.2",
+  "scripts": {
+    "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
+    "clean": "rm -rf ./library && rm -rf ./local && rm -rf ./profiles && rm -rf ./temp && rm ./proto-structs/index.js && rm ./proto-structs/index.d.ts",
+    "build-proto": "rm -f ./proto-structs/index.js && rm -f ./proto-structs/index.d.ts && npm run build-proto:pbjs && npm run build-proto:pbts",
+    "build-proto:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./proto-structs/index.js ../proto/*.proto",
+    "build-proto:pbts": "pbts --main --out ./proto-structs/index.d.ts ./proto-structs/index.js && node ./tools/wrap-pbts-result.js"
+  },
+  "dependencies": {
+    "crypto-es": "1.2.7",
+    "long": "4.0.0",
+    "proto-structs": "file:proto-structs",
+    "protobufjs": "6.8.8"
+  },
+  "devDependencies": {
+    "typescript": "4.1.3"
+  },
+  "creator": {
+    "version": "3.4.2"
+  }
+}
