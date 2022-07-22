@@ -1,10 +1,9 @@
 import { Cmd } from './Cmd';
 import { RouteBase } from './RouteBase';
 
-import { root } from "proto-structs";
-const proto = root.proto;
+import { proto } from "proto-structs";
 
 export default class BarRoute extends RouteBase {
-    public Bar: Cmd = Cmd.create('connector.entryHandler.onBar', root.proto.Bar, root.proto.Foo);
+    public Bar: Cmd = Cmd.create('connector.entryHandler.onBar', proto.Bar, proto.Foo);
 
 }

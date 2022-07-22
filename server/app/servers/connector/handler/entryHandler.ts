@@ -1,6 +1,6 @@
 import { Application, FrontendSession } from 'pinus';
 
-import { root } from "proto-structs";
+import { proto } from "proto-structs";
 import { Structs } from '../../../structs/Structs';
 
 export default function (app: Application) {
@@ -23,7 +23,7 @@ export class Handler {
 
         console.log('msg instanceof Structs.bar.Bar.client:', msg instanceof Structs.bar.Bar.client);
 
-        const ret = { foo: 2048 } as root.proto.IFoo;
+        const ret = { foo: 2048 } as proto.IFoo;
 
         // console.log('ret instanceof Structs.bar.Bar.server:', ret instanceof Structs.bar.Bar.server);
 
@@ -39,7 +39,7 @@ export class Handler {
     async onFoo(msg: any, session: FrontendSession) {
         console.log('msg instanceof Structs.foo.Foo.client:', msg instanceof Structs.foo.Foo.client);
 
-        const ret = { bar: 2048 } as root.proto.IBar;
+        const ret = { bar: 2048 } as proto.IBar;
 
         // console.log('ret instanceof Structs.foo.Foo.server:', ret instanceof Structs.foo.Foo.server);
 

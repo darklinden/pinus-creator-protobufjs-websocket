@@ -1,7 +1,7 @@
 import { _decorator, Component, EditBox } from "cc";
 const { ccclass, property } = _decorator;
 
-import root from "proto-structs";
+import { proto } from "proto-structs";
 import { Structs } from "../scripts/structs/Structs";
 import pinus from "./pinus/Pinus";
 
@@ -17,12 +17,12 @@ export class NetworkTest extends Component {
     }
 
     onConnected() {
-        const msg: root.proto.IFoo = { foo: 1024 };
+        const msg: proto.IFoo = { foo: 1024 };
         console.log('request foo expect bar')
         pinus.request(Structs.foo.Foo.route, msg as any, data => {
             console.log(data);
 
-            const msg: root.proto.IBar = { bar: 1024 };
+            const msg: proto.IBar = { bar: 1024 };
             console.log('request bar expect foo')
             pinus.request(Structs.bar.Bar.route, msg as any, data => {
                 console.log(data);

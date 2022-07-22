@@ -1,7 +1,7 @@
 import * as $protobuf from "protobufjs";
-
-declare namespace root {
-    // DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run types'.
+    
+export declare namespace root {
+// DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run types'.
 
 /** Namespace proto. */
 export namespace proto {
@@ -188,4 +188,3 @@ export namespace proto {
 }
 
 }
-export default root;

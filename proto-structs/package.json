@@ -1,0 +1,38 @@
+{
+    "name": "proto-structs",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "",
+    "exports": {
+        ".": {
+            "//types-comment": "Entry-point for TypeScript resolution - must occur first!",
+            "types": "./types/index.d.ts",
+
+            "//import-comment": "Entry-point for 'import my-package' in ESM",
+            "import": "./esm/index.js",
+
+            "//require-comment": "Entry-point for 'require(my-package)' in CJS",
+            "require": "./commonjs/index.cjs"
+        }
+    },
+
+    "//main-comment": "CJS fall-back for older versions of Node.js",
+    "main": "./commonjs/index.cjs",
+
+    "//types-comment": "Fall-back for older versions of TypeScript",
+    "types": "./types/index.d.ts",
+
+    "author": "",
+    "dependencies": {
+        "long": "4.0.0",
+        "protobufjs": "6.8.8"
+    },
+    "scripts": {
+        "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
+        "build-proto": "rm -f ./commonjs/index.cjs && rm -f ./types/index.d.ts && rm -f ./esm/index.js && npm run build-proto:pbjs && npm run build-proto:pbts && npm run build-proto:wrap-commonjs && npm run build-proto:wrap-esm && rm -f ./index.js",
+        "build-proto:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./index.js ./proto/*.proto",
+        "build-proto:pbts": "pbts --main --out ./types/index.d.ts ./index.js && node ./tools/wrap-pbts.js",
+        "build-proto:wrap-commonjs":"cp ./index.js ./commonjs/index.cjs && node ./tools/wrap-commonjs.js",
+        "build-proto:wrap-esm":"cp ./index.js ./esm/index.js && node ./tools/wrap-esm.js"
+    }
+}
