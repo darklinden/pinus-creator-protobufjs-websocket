@@ -19,7 +19,7 @@
         "@types/node": "^12.7.12",
         "bluebird": "^3.5.1",
         "pinus": "1.6.3",
-        "proto-structs": "file:proto-structs",
+        "proto-structs": "file:../proto-structs",
         "protobufjs": "^6.11.2",
         "reflect-metadata": "^0.1.10",
         "source-map-support": "^0.5.0"
