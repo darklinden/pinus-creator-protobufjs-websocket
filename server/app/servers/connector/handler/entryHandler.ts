@@ -46,6 +46,22 @@ export class Handler {
         return ret;
     }
 
+    /**
+     * New client entry.
+     *
+     * @param  {Object}   msg     request message
+     * @param  {Object}   session current session object
+     */
+    async onLargeNumber(msg: any, session: FrontendSession) {
+        console.log(msg.num);
+
+        const ret = { num: '99999999999999999999' } as proto.ILargeNumber;
+
+        // console.log('ret instanceof Structs.foo.Foo.server:', ret instanceof Structs.foo.Foo.server);
+
+        return ret;
+    }
+
 
     /**
      * New client entry.

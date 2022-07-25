@@ -1,0 +1,4 @@
+syntax = "proto3";
+package proto;
+
+message LargeNumber { string num = 1; }

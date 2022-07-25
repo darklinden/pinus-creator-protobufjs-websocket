@@ -183,4 +183,94 @@ export namespace proto {
          */
         public toJSON(): { [k: string]: any };
     }
+
+    /** Properties of a LargeNumber. */
+    interface ILargeNumber {
+
+        /** LargeNumber num */
+        num?: (string|null);
+    }
+
+    /** Represents a LargeNumber. */
+    class LargeNumber implements ILargeNumber {
+
+        /**
+         * Constructs a new LargeNumber.
+         * @param [properties] Properties to set
+         */
+        constructor(properties?: proto.ILargeNumber);
+
+        /** LargeNumber num. */
+        public num: string;
+
+        /**
+         * Creates a new LargeNumber instance using the specified properties.
+         * @param [properties] Properties to set
+         * @returns LargeNumber instance
+         */
+        public static create(properties?: proto.ILargeNumber): proto.LargeNumber;
+
+        /**
+         * Encodes the specified LargeNumber message. Does not implicitly {@link proto.LargeNumber.verify|verify} messages.
+         * @param message LargeNumber message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encode(message: proto.ILargeNumber, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Encodes the specified LargeNumber message, length delimited. Does not implicitly {@link proto.LargeNumber.verify|verify} messages.
+         * @param message LargeNumber message or plain object to encode
+         * @param [writer] Writer to encode to
+         * @returns Writer
+         */
+        public static encodeDelimited(message: proto.ILargeNumber, writer?: $protobuf.Writer): $protobuf.Writer;
+
+        /**
+         * Decodes a LargeNumber message from the specified reader or buffer.
+         * @param reader Reader or buffer to decode from
+         * @param [length] Message length if known beforehand
+         * @returns LargeNumber
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decode(reader: ($protobuf.Reader|Uint8Array), length?: number): proto.LargeNumber;
+
+        /**
+         * Decodes a LargeNumber message from the specified reader or buffer, length delimited.
+         * @param reader Reader or buffer to decode from
+         * @returns LargeNumber
+         * @throws {Error} If the payload is not a reader or valid buffer
+         * @throws {$protobuf.util.ProtocolError} If required fields are missing
+         */
+        public static decodeDelimited(reader: ($protobuf.Reader|Uint8Array)): proto.LargeNumber;
+
+        /**
+         * Verifies a LargeNumber message.
+         * @param message Plain object to verify
+         * @returns `null` if valid, otherwise the reason why it is not
+         */
+        public static verify(message: { [k: string]: any }): (string|null);
+
+        /**
+         * Creates a LargeNumber message from a plain object. Also converts values to their respective internal types.
+         * @param object Plain object
+         * @returns LargeNumber
+         */
+        public static fromObject(object: { [k: string]: any }): proto.LargeNumber;
+
+        /**
+         * Creates a plain object from a LargeNumber message. Also converts values to other types if specified.
+         * @param message LargeNumber
+         * @param [options] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(message: proto.LargeNumber, options?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this LargeNumber to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
 }

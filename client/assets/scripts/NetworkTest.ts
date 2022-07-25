@@ -5,6 +5,8 @@ import { proto } from "proto-structs";
 import { Structs } from "../scripts/structs/Structs";
 import pinus from "./pinus/Pinus";
 
+import JSBI from "jsbi";
+
 @ccclass
 export class NetworkTest extends Component {
 
@@ -17,17 +19,27 @@ export class NetworkTest extends Component {
     }
 
     onConnected() {
-        const msg: proto.IFoo = { foo: 1024 };
-        console.log('request foo expect bar')
-        pinus.request(Structs.foo.Foo.route, msg as any, data => {
+        const big = JSBI.BigInt("75643564363473453456342378564387956906736546456235345");
+        const msg: proto.ILargeNumber = { num: big.toString(10) };
+        console.log('request largeNumber expect largeNumber')
+        pinus.request(Structs.foo.LargeNumber.route, msg as any, data => {
             console.log(data);
-
-            const msg: proto.IBar = { bar: 1024 };
-            console.log('request bar expect foo')
-            pinus.request(Structs.bar.Bar.route, msg as any, data => {
-                console.log(data);
-            });
+            const ret = data as proto.ILargeNumber;
+            const v = JSBI.BigInt(ret.num);
+            console.log(v.toString(10));
         });
+
+        // const msg: proto.IFoo = { foo: 1024 };
+        // console.log('request foo expect bar')
+        // pinus.request(Structs.foo.Foo.route, msg as any, data => {
+        //     console.log(data);
+
+        //     const msg: proto.IBar = { bar: 1024 };
+        //     console.log('request bar expect foo')
+        //     pinus.request(Structs.bar.Bar.route, msg as any, data => {
+        //         console.log(data);
+        //     });
+        // });
     }
 
     onError() {
