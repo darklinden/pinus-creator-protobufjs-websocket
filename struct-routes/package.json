@@ -1,0 +1,37 @@
+{
+    "name": "struct-routes",
+    "type": "module",
+    "version": "1.0.0",
+    "description": "",
+    "exports": {
+        ".": {
+            "//types-comment": "Entry-point for TypeScript resolution - must occur first!",
+            "types": "./dist/types/index.d.ts",
+            
+            "//import-comment": "Entry-point for 'import my-package' in ESM",
+            "import": "./dist/esm/index.mjs",
+
+            "//require-comment": "Entry-point for 'require(my-package)' in CJS",
+            "require": "./dist/cjs/index.cjs"
+        }
+    },
+    "//main-comment": "CJS fall-back for older versions of Node.js",
+    "main": "./dist/cjs/index.cjs",
+    "//types-comment": "Fall-back for older versions of TypeScript",
+    "types": "./dist/types/index.d.ts",
+    "author": "",
+    "dependencies": {
+        "long": "4.0.0",
+        "proto-structs": "file:../proto-structs",
+        "protobufjs": "6.8.8"
+    },
+    "scripts": {
+        "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
+        "build": "rm -rf ./dist && tsc --project tsconfig.esm.json & tsc --project tsconfig.cjs.json && npm run build:wrap-cjs && npm run build:wrap-esm",
+        "build:wrap-cjs": "node ./tools/wrap-cjs",
+        "build:wrap-esm": "node ./tools/wrap-esm"
+    },
+    "devDependencies": {
+        "typescript": "^4.7.4"
+    }
+}

@@ -11,7 +11,8 @@
     "jsbi": "^4.3.0",
     "long": "4.0.0",
     "proto-structs": "file:../proto-structs",
-    "protobufjs": "6.8.8"
+    "protobufjs": "6.8.8",
+    "struct-routes": "file:../struct-routes"
   },
   "devDependencies": {
     "typescript": "4.1.3"

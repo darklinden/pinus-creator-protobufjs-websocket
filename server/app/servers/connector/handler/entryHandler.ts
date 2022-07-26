@@ -1,7 +1,7 @@
 import { Application, FrontendSession } from 'pinus';
 
 import { proto } from "proto-structs";
-import { Structs } from '../../../structs/Structs';
+import { Structs } from 'struct-routes';
 
 export default function (app: Application) {
     return new Handler(app);

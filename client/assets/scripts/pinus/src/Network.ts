@@ -1,5 +1,5 @@
 import { ISchedulable, Scheduler, director, macro, EventTarget } from 'cc';
-import { Structs } from '../../structs/Structs';
+import { Structs } from 'struct-routes';
 import { INetworkHandler } from './INetworkHandler';
 import { Message, MessageType, Package, Protocol, Client, ERR_CONNECT_TIMEOUT, EVENT_BEENKICKED, EVENT_CLOSED, EVENT_CONNECTED, EVENT_ERROR, EVENT_HANDSHAKEERROR, EVENT_HANDSHAKEOVER, EVENT_RECONNECTED } from './internal'
 

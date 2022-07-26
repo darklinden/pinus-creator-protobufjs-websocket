@@ -1,12 +1,11 @@
-import BarRoute from "./BarRoute";
-import FooRoute from "./FooRoute";
+import { BarRoute } from "./BarRoute";
+import { FooRoute } from "./FooRoute";
 import { Cmd } from "./Cmd";
 import { RouteBase } from "./RouteBase";
 
 export class Structs {
 
     // --- group routes begin ---
-
     private _foo: FooRoute = null;
     public static get foo(): FooRoute { return this.instance._foo; }
 

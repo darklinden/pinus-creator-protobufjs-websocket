@@ -1,6 +1,6 @@
 import { pinus } from 'pinus';
 import { preload } from './preload';
-import * as coder from './app/structs/protobuf_coder';
+import * as coder from './app/protobuf_coder';
 
 /**
  *  替换全局Promise

@@ -1,16 +1,15 @@
-import { Cmd } from "./Cmd";
-
+import { Cmd } from "./Cmd.mjs";
 export class RouteBase {
-
-    public getMap(): Map<string, Cmd> {
-        const map: Map<string, Cmd> = new Map();
+    getMap() {
+        const map = new Map();
         for (const key in this) {
             if (Object.prototype.hasOwnProperty.call(this, key)) {
-                const element: any = this[key];
+                const element = this[key];
                 if (element instanceof Cmd)
-                    element.reg(map)
+                    element.reg(map);
             }
         }
         return map;
     }
 }
+//# sourceMappingURL=RouteBase.js.map

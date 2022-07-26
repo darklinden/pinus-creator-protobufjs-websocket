@@ -2,7 +2,7 @@ import { _decorator, Component, EditBox } from "cc";
 const { ccclass, property } = _decorator;
 
 import { proto } from "proto-structs";
-import { Structs } from "../scripts/structs/Structs";
+import { Structs } from "struct-routes";
 import pinus from "./pinus/Pinus";
 
 import JSBI from "jsbi";

@@ -8,7 +8,6 @@ const __dirname = path.dirname(__filename);
 const file = path.join(__dirname, '..', 'esm', 'index.js');
 let original = fs.readFileSync(file, { encoding: 'utf8' });
 
-// remove last module.exports =
 let lines = original.split('\n');
 
 // remove first comment and strict and last module.exports =
@@ -20,11 +19,8 @@ lines.unshift(
 
 for (let i = 0; i < lines.length; i++) {
     let line = lines[i];
-    const m = line.match();
-    if (m && m.length) {
-        line = line.replace(/^\$root\.(.*) = \(function\(\) \{/g, 'export const $1 = (function() {');
-        lines[i] = line;
-    }
+    line = line.replace(/^\$root\.(.*) = \(function\(\) \{/g, 'export const $1 = (function() {');
+    lines[i] = line;
 }
 
 original = lines.join('\n');

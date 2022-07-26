@@ -22,7 +22,8 @@
         "proto-structs": "file:../proto-structs",
         "protobufjs": "^6.11.2",
         "reflect-metadata": "^0.1.10",
-        "source-map-support": "^0.5.0"
+        "source-map-support": "^0.5.0",
+        "struct-routes": "file:../struct-routes"
     },
     "devDependencies": {
         "cpy": "^8.1.0",

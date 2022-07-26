@@ -3,7 +3,7 @@ import * as  Constants from 'pinus/lib/util/constants';
 import { getLogger } from 'pinus-logger';
 import * as path from 'path';
 import { IConnector } from 'pinus/lib/interfaces/IConnector';
-import { Structs } from './Structs'
+import { Structs } from 'struct-routes';
 import { ConnectorComponent } from 'pinus/lib/components/connector';
 import { HybridConnector } from 'pinus';
 
