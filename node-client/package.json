@@ -1,0 +1,25 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "type": "commonjs",
+  "main": "./dist/test.js",
+  "scripts": {
+    "test": "rm -rf ./dist && tsc && node ./dist/test",
+    "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
+    "deps": "npm i && npm i ../proto-structs && npm i ../struct-routes "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "events": "^3.3.0",
+    "jsbi": "^4.3.0",
+    "proto-structs": "file:../proto-structs",
+    "struct-routes": "file:../struct-routes",
+    "typescript": "^4.7.4",
+    "ws": "^8.8.1"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.3"
+  }
+}
