@@ -89,3 +89,12 @@ export function encodeMsgBody(msg: Uint8Array, buffer: Uint8Array, offset: numbe
     copyArray(buffer, offset, msg, 0, msg.length);
     return offset + msg.length;
 }
+
+export function timestr(): string {
+    const date = new Date();
+    const hours = date.getHours();
+    const minutes = "0" + date.getMinutes();
+    const seconds = "0" + date.getSeconds();
+    const ms = "00" + date.getMilliseconds();
+    return '[' + hours + ':' + minutes.slice(-2) + ':' + seconds.slice(-2) + '.' + ms.slice(-3) + '] ';
+}

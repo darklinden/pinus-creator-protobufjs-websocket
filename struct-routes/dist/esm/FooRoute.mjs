@@ -6,6 +6,7 @@ export class FooRoute extends RouteBase {
         super(...arguments);
         this.Foo = Cmd.create('connector.entryHandler.onFoo', proto.Foo, proto.Bar);
         this.LargeNumber = Cmd.create('connector.entryHandler.onLargeNumber', proto.LargeNumber, proto.LargeNumber);
+        this.NotifyLargeNumber = Cmd.create('connector.entryHandler.onNotifyLargeNumber', proto.LargeNumber, proto.LargeNumber);
     }
 }
 //# sourceMappingURL=FooRoute.js.map

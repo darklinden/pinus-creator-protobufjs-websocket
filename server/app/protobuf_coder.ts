@@ -1,5 +1,4 @@
 import { Message } from 'pinus-protocol';
-import * as  Constants from 'pinus/lib/util/constants';
 import { getLogger } from 'pinus-logger';
 import * as path from 'path';
 import { IConnector } from 'pinus/lib/interfaces/IConnector';

@@ -12,21 +12,27 @@ export class NetworkTest extends Component {
 
     onEnable(): void {
         pinus.on(pinus.EVENT_HANDSHAKEOVER, this.onConnected, this);
+        pinus.on(Structs.foo.NotifyLargeNumber.route, this.onNotifyLargeNumber, this);
 
         this.scheduleOnce(() => {
             pinus.connect('ws://127.0.0.1:3010');
         })
     }
 
+    onNotifyLargeNumber(msg: any) {
+        console.log('onNotifyLargeNumber', msg);
+    }
+
     onConnected() {
         const big = JSBI.BigInt("75643564363473453456342378564387956906736546456235345");
         const msg: proto.ILargeNumber = { num: big.toString(10) };
-        console.log('request largeNumber expect largeNumber')
+        // console.log('request largeNumber expect largeNumber');
         pinus.request(Structs.foo.LargeNumber.route, msg as any, data => {
-            console.log(data);
-            const ret = data as proto.ILargeNumber;
-            const v = JSBI.BigInt(ret.num);
-            console.log(v.toString(10));
+            console.log('response', data);
+            // const ret = data as proto.ILargeNumber;
+            // const v = JSBI.BigInt(ret.num);
+            // console.log(v.toString(10));
+            pinus.notify(Structs.foo.NotifyLargeNumber.route, msg as any);
         });
 
         // const msg: proto.IFoo = { foo: 1024 };

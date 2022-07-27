@@ -4,7 +4,10 @@
   "version": "3.4.2",
   "scripts": {
     "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
-    "clean": "rm -rf ./library && rm -rf ./local && rm -rf ./profiles && rm -rf ./temp"
+    "clean": "rm -rf ./library && rm -rf ./local && rm -rf ./profiles && rm -rf ./temp && npm install",
+    "build-deps": "npm run build-proto && npm run build-route",
+    "build-proto": "rm -rf ../proto-structs/node_modules && cd ../proto-structs && npm install && npm run build",
+    "build-route": "rm -rf ./struct-routes/node_modules && cd ../struct-routes && npm install && npm run build"
   },
   "dependencies": {
     "crypto-es": "1.2.7",

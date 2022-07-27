@@ -1,3 +1,4 @@
+import { ScheduleOptions, SessionService } from 'pinus';
 import { Application, FrontendSession } from 'pinus';
 
 import { proto } from "proto-structs";
@@ -60,6 +61,43 @@ export class Handler {
         // console.log('ret instanceof Structs.foo.Foo.server:', ret instanceof Structs.foo.Foo.server);
 
         return ret;
+    }
+
+    /**
+     * New client entry.
+     *
+     * @param  {Object}   msg     request message
+     * @param  {Object}   session current session object
+     */
+    async onNotifyLargeNumber(msg: any, session: FrontendSession) {
+        console.log(msg.num);
+
+        const sid = session.id;
+        const uid = session.uid;
+
+        const pingTimer = setTimeout(() => {
+
+            const ret = { num: '99999999999999999999' } as proto.ILargeNumber;
+            let opts: ScheduleOptions = {
+                type: 'broadcast',
+                userOptions: {
+                    binded: false,
+                    filterParam: null
+                }
+            };
+            this.app.components.__connector__.send(null, Structs.foo.NotifyLargeNumber.route, ret, [sid], opts, () => { });
+
+            // const sessionService = this.app.get('sessionService') as SessionService;
+            // sessionService.sendMessage(sid, ret);
+
+            // let channel = channelService.getChannel(name, flag);
+            // let param = {
+            //     user: username
+            // };
+            // console.log('send on add', param);
+            // channel.pushMessage('onAdd', param);
+            // this.app.get
+        }, 1000);
     }
 
 

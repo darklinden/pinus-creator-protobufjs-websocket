@@ -1,7 +1,7 @@
 import { ISchedulable, Scheduler, director, macro, EventTarget } from 'cc';
 import { Structs } from 'struct-routes';
 import { INetworkHandler } from './INetworkHandler';
-import { Message, MessageType, Package, Protocol, Client, ERR_CONNECT_TIMEOUT, EVENT_BEENKICKED, EVENT_CLOSED, EVENT_CONNECTED, EVENT_ERROR, EVENT_HANDSHAKEERROR, EVENT_HANDSHAKEOVER, EVENT_RECONNECTED } from './internal'
+import { Message, MessageType, Package, Protocol, Client, ERR_CONNECT_TIMEOUT, EVENT_BEENKICKED, EVENT_CLOSED, EVENT_CONNECTED, EVENT_ERROR, EVENT_HANDSHAKEERROR, EVENT_HANDSHAKEOVER, EVENT_RECONNECTED, timestr } from './internal'
 
 const NETWORK_LOG = true;
 
@@ -47,7 +47,7 @@ export class Network extends EventTarget implements INetworkHandler, ISchedulabl
             this.emit(name, data);
         }
         else {
-            NETWORK_LOG && console.warn('pinus event [' + name + '] no listener')
+            NETWORK_LOG && console.warn(timestr(), 'pinus event [' + name + '] no listener')
         }
     }
     // --- EventTarget end ---
@@ -241,6 +241,9 @@ export class Network extends EventTarget implements INetworkHandler, ISchedulabl
             console.error('pinus onData decode failed');
             return;
         }
+        else {
+            NETWORK_LOG && console.log(timestr(), 'recv', msg);
+        }
 
         if (msg.id) {
             // if have a id then find the callback function with the request
@@ -378,6 +381,7 @@ export class Network extends EventTarget implements INetworkHandler, ISchedulabl
     }
 
     protected _sendMessage(reqId: number, route: number | string, msg: any): void {
+        NETWORK_LOG && console.log(timestr(), 'sendMessage', reqId, route, msg);
         const message = this.encode(reqId, route, msg);
         this.client.sendBuffer(Package.encode(Package.TYPE_DATA, message));
     }

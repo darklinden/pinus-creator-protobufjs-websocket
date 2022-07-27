@@ -27,7 +27,7 @@
     },
     "scripts": {
         "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
-        "build": "rm -rf ./dist && tsc --project tsconfig.esm.json & tsc --project tsconfig.cjs.json && npm run build:wrap-cjs && npm run build:wrap-esm",
+        "build": "rm -rf ./dist && tsc --project tsconfig.esm.json && tsc --project tsconfig.cjs.json && npm run build:wrap-cjs && npm run build:wrap-esm",
         "build:wrap-cjs": "node ./tools/wrap-cjs",
         "build:wrap-esm": "node ./tools/wrap-esm"
     },

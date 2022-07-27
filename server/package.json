@@ -8,11 +8,11 @@
     "main": "./dist/app",
     "scripts": {
         "test": "npm run build && cd dist &&  node app",
-        "build": "tsc && node ./tools/copy",
         "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
-        "build-proto": "rm -f ./proto-structs/index.js && rm -f ./proto-structs/index.d.ts && npm run build-proto:pbjs && npm run build-proto:pbts",
-        "build-proto:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./proto-structs/index.js ../proto/*.proto",
-        "build-proto:pbts": "pbts --main --out ./proto-structs/index.d.ts ./proto-structs/index.js && node ./tools/wrap-pbts-result.js"
+        "build": "rm -rf ./node_modules && npm install && tsc && node ./tools/copy",
+        "build-deps": "npm run build-proto && npm run build-route",
+        "build-proto": "rm -rf ../proto-structs/node_modules && cd ../proto-structs && npm install && npm run build",
+        "build-route": "rm -rf ./struct-routes/node_modules && cd ../struct-routes && npm install && npm run build"
     },
     "dependencies": {
         "@types/bluebird": "^3.5.19",

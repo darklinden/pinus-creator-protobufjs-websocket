@@ -9,6 +9,7 @@ class FooRoute extends RouteBase_1.RouteBase {
         super(...arguments);
         this.Foo = Cmd_1.Cmd.create('connector.entryHandler.onFoo', proto_structs_1.proto.Foo, proto_structs_1.proto.Bar);
         this.LargeNumber = Cmd_1.Cmd.create('connector.entryHandler.onLargeNumber', proto_structs_1.proto.LargeNumber, proto_structs_1.proto.LargeNumber);
+        this.NotifyLargeNumber = Cmd_1.Cmd.create('connector.entryHandler.onNotifyLargeNumber', proto_structs_1.proto.LargeNumber, proto_structs_1.proto.LargeNumber);
     }
 }
 exports.FooRoute = FooRoute;

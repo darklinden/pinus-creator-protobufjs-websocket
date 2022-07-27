@@ -29,10 +29,10 @@
     },
     "scripts": {
         "watch": "tsc --watch --noEmit --noErrorTruncation --pretty",
-        "build-proto": "rm -f ./commonjs/index.cjs && rm -f ./types/index.d.ts && rm -f ./esm/index.js && npm run build-proto:pbjs && npm run build-proto:pbts && npm run build-proto:wrap-commonjs && npm run build-proto:wrap-esm && rm -f ./index.js",
-        "build-proto:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./index.js ./proto/*.proto",
-        "build-proto:pbts": "pbts --main --out ./types/index.d.ts ./index.js && node ./tools/wrap-pbts.js",
-        "build-proto:wrap-commonjs":"cp ./index.js ./commonjs/index.cjs && node ./tools/wrap-commonjs.js",
-        "build-proto:wrap-esm":"cp ./index.js ./esm/index.js && node ./tools/wrap-esm.js"
+        "build": "rm -f ./commonjs/index.cjs && rm -f ./types/index.d.ts && rm -f ./esm/index.js && npm run build:pbjs && npm run build:pbts && npm run build:wrap-commonjs && npm run build:wrap-esm && rm -f ./index.js",
+        "build:pbjs": "pbjs --dependency protobufjs/minimal.js --target static-module --wrap commonjs --out ./index.js ./proto/*.proto",
+        "build:pbts": "pbts --main --out ./types/index.d.ts ./index.js && node ./tools/wrap-pbts.js",
+        "build:wrap-commonjs":"cp ./index.js ./commonjs/index.cjs && node ./tools/wrap-commonjs.js",
+        "build:wrap-esm":"cp ./index.js ./esm/index.js && node ./tools/wrap-esm.js"
     }
 }
