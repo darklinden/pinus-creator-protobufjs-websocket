@@ -372,7 +372,7 @@ export class Network extends EventEmitter implements INetworkHandler {
         var type = reqId ? MessageType.REQUEST : MessageType.NOTIFY;
 
         const cmd = Structs.getCmd(route as string);
-        msg = this.packProto(msg, cmd.server);
+        msg = this.packProto(msg, cmd.client);
 
         var compressRoute = 0;
         if (this._routeMap.has(route as string)) {
