@@ -28,6 +28,20 @@ namespace Pinus
         private void Update()
         {
             if (OnFrameUpdated != null) OnFrameUpdated();
+
+            if (m_DelayedActions.Count > 0)
+            {
+                for (int i = m_DelayedActions.Count - 1; i >= 0; i--)
+                {
+                    var action = m_DelayedActions[i];
+                    action.TimePassed += Time.unscaledDeltaTime;
+                    if (action.TimePassed >= action.TimeLimit)
+                    {
+                        action.Action();
+                        m_DelayedActions.RemoveAt(i);
+                    }
+                }
+            }
         }
 
         public event Event.Connected OnConnected;
@@ -70,6 +84,35 @@ namespace Pinus
         public void BeenKicked(string url)
         {
             if (OnBeenKicked != null) OnBeenKicked(url);
+        }
+
+        struct DelayAction
+        {
+            public float TimePassed;
+            public float TimeLimit;
+            public Action Action;
+        }
+
+        private List<DelayAction> m_DelayedActions = new List<DelayAction>();
+        public void DoAfterDelay(float delay, Action action)
+        {
+            m_DelayedActions.Add(new DelayAction()
+            {
+                TimePassed = 0,
+                TimeLimit = delay,
+                Action = action
+            });
+        }
+
+        public void RemoveDelayCallback(Action action)
+        {
+            for (int i = m_DelayedActions.Count - 1; i >= 0; i--)
+            {
+                if (m_DelayedActions[i].Action == action)
+                {
+                    m_DelayedActions.RemoveAt(i);
+                }
+            }
         }
     }
 }

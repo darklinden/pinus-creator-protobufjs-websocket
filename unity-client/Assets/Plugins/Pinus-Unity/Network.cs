@@ -77,17 +77,6 @@ namespace Pinus
         // callback from request id
         protected Dictionary<int, Action<Google.Protobuf.IMessage>> m_RequestCallbackMap = new Dictionary<int, Action<Google.Protobuf.IMessage>>();
 
-        internal HandshakeSendPackage m_HandshakeBuffer = new HandshakeSendPackage
-        {
-            sys = new HandshakeSendPackageSys
-            {
-                type = "unity",
-                version = "1.0.0",
-                rsa = null
-            },
-            user = null
-        };
-
         protected Dictionary<string, int> m_RouteMap = null;
         protected Dictionary<int, string> m_RouteMapBack = null;
 
@@ -95,10 +84,36 @@ namespace Pinus
         {
             Client = new Client(this);
             EventBus.Instance.OnFrameUpdated -= HeartbeatCheck;
-            // EventManager.Instance.OnFrameUpdated += OnFrameUpdated;
+            EventBus.Instance.OnFrameUpdated += HeartbeatCheck;
         }
 
         // --- Socket begin ---
+        private byte[] m_HandshakeBuff = null;
+        private byte[] HandshakeBuff
+        {
+            get
+            {
+                if (m_HandshakeBuff == null)
+                {
+                    HandshakeSendPackage handshake = new HandshakeSendPackage
+                    {
+                        sys = new HandshakeSendPackageSys
+                        {
+                            type = "unity",
+                            version = "1.0.0",
+                            rsa = null
+                        },
+                        user = null
+                    };
+
+                    var str = JsonConvert.SerializeObject(handshake);
+                    var obj = Protocol.StrEncode(str);
+                    m_HandshakeBuff = Package.Encode(PackageType.Handshake, obj, obj.Length);
+                }
+                return m_HandshakeBuff;
+            }
+        }
+
         public void OnOpen()
         {
             if (Reconnecting)
@@ -109,9 +124,8 @@ namespace Pinus
             EventBus.Instance.Connected(Url);
 
             ResetReconnect();
-            var str = JsonConvert.SerializeObject(m_HandshakeBuffer);
-            var obj = Protocol.StrEncode(str);
-            Client.SendBuffer(Package.Encode(PackageType.Handshake, obj, obj.Length));
+
+            Client.SendBuffer(HandshakeBuff);
         }
 
         public void OnRecv(byte[] data)
@@ -322,6 +336,7 @@ namespace Pinus
             Log.D("Pinus Network OnKick", d);
 
             EventBus.Instance.BeenKicked(Url);
+            Client.Close();
         }
 
         internal void ProcessPackage(byte[] bytes)
