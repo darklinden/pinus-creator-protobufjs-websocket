@@ -2,7 +2,7 @@ using System.IO;
 using System;
 using Google.Protobuf;
 
-namespace Pinus
+namespace PinusUnity
 {
     public static class ProtoCoder
     {

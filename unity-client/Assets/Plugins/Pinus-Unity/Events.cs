@@ -1,5 +1,5 @@
 using System;
-namespace Pinus
+namespace PinusUnity
 {
     public static class Event
     {

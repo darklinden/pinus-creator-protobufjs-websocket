@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Pinus
+namespace PinusUnity
 {
     public class EventBus : MonoBehaviour
     {

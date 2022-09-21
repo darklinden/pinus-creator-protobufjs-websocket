@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Pinus
+namespace PinusUnity
 {
     public static class Message
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace Pinus
+namespace PinusUnity
 {
     public class Network : INetworkHandler
     {

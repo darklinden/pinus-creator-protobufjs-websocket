@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace Pinus
+namespace PinusUnity
 {
     public static class Protocol
     {

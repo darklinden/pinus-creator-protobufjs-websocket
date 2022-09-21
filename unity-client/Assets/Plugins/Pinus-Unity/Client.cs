@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityWebSocket;
 
-namespace Pinus
+namespace PinusUnity
 {
     public class Client
     {

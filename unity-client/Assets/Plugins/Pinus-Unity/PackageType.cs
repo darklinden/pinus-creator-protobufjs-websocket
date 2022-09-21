@@ -1,4 +1,4 @@
-namespace Pinus
+namespace PinusUnity
 {
     internal enum PackageType
     {

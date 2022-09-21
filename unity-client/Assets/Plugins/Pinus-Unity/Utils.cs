@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using UnityEngine;
 
-namespace Pinus
+namespace PinusUnity
 {
     public static class Utils
     {

@@ -1,6 +1,6 @@
 using System;
 
-namespace Pinus
+namespace PinusUnity
 {
     internal interface INetworkHandler
     {

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-namespace Pinus
+namespace PinusUnity
 {
     public struct HandshakeSendPackageSys
     {

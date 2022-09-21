@@ -1,4 +1,4 @@
-namespace Pinus
+namespace PinusUnity
 {
     public enum MessageType
     {

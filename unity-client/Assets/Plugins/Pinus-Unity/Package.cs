@@ -1,5 +1,5 @@
 
-namespace Pinus
+namespace PinusUnity
 {
 
     internal static class Package

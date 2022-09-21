@@ -1,5 +1,5 @@
 using System;
-using Pinus;
+using PinusUnity;
 using UnityEngine;
 using Google.Protobuf;
 
@@ -7,10 +7,10 @@ public class NetworkTest : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventBus.Instance.OnHandshakeOver += OnHandshakeOver;
+        Pinus.EventBus.OnHandshakeOver += OnHandshakeOver;
         EventDispatcher.AddListener<Proto.LargeNumber>(Structs.FooRoute.NotifyLargeNumber.route, OnNotifyLargeNumber, this);
 
-        Pinus.Network.Default.Connect("ws://127.0.0.1:3010");
+        Pinus.Connect("ws://127.0.0.1:3010");
     }
 
     private void OnNotifyLargeNumber(Proto.LargeNumber e)
@@ -22,10 +22,10 @@ public class NetworkTest : MonoBehaviour
     {
         var data = new Proto.LargeNumber { Num = "123456789123456789" };
 
-        Pinus.Network.Default.Request(Structs.FooRoute.LargeNumber.route, data, d =>
+        Pinus.Request(Structs.FooRoute.LargeNumber.route, data, d =>
         {
             Log.D("Response", d);
-            Pinus.Network.Default.Notify(Structs.FooRoute.NotifyLargeNumber.route, d);
+            Pinus.Notify(Structs.FooRoute.NotifyLargeNumber.route, d);
         });
 
         // const msg: proto.IFoo = { foo: 1024 };
