@@ -24,12 +24,12 @@ namespace Proto {
     static LargeNumberReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFMYXJnZU51bWJlci5wcm90bxIFcHJvdG8iGgoLTGFyZ2VOdW1iZXISCwoD",
-            "bnVtGAEgASgJYgZwcm90bzM="));
+            "ChFMYXJnZU51bWJlci5wcm90bxIFcHJvdG8iMAoLTGFyZ2VOdW1iZXISDwoH",
+            "c3RyX251bRgBIAEoCRIQCghsb25nX251bRgCIAEoA2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LargeNumber), global::Proto.LargeNumber.Parser, new[]{ "Num" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LargeNumber), global::Proto.LargeNumber.Parser, new[]{ "StrNum", "LongNum" }, null, null, null, null)
           }));
     }
     #endregion
@@ -65,7 +65,8 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LargeNumber(LargeNumber other) : this() {
-      num_ = other.num_;
+      strNum_ = other.strNum_;
+      longNum_ = other.longNum_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -74,14 +75,25 @@ namespace Proto {
       return new LargeNumber(this);
     }
 
-    /// <summary>Field number for the "num" field.</summary>
-    public const int NumFieldNumber = 1;
-    private string num_ = "";
+    /// <summary>Field number for the "str_num" field.</summary>
+    public const int StrNumFieldNumber = 1;
+    private string strNum_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string Num {
-      get { return num_; }
+    public string StrNum {
+      get { return strNum_; }
       set {
-        num_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        strNum_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "long_num" field.</summary>
+    public const int LongNumFieldNumber = 2;
+    private long longNum_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public long LongNum {
+      get { return longNum_; }
+      set {
+        longNum_ = value;
       }
     }
 
@@ -98,14 +110,16 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (Num != other.Num) return false;
+      if (StrNum != other.StrNum) return false;
+      if (LongNum != other.LongNum) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (Num.Length != 0) hash ^= Num.GetHashCode();
+      if (StrNum.Length != 0) hash ^= StrNum.GetHashCode();
+      if (LongNum != 0L) hash ^= LongNum.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -122,9 +136,13 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (Num.Length != 0) {
+      if (StrNum.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Num);
+        output.WriteString(StrNum);
+      }
+      if (LongNum != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(LongNum);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -135,9 +153,13 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (Num.Length != 0) {
+      if (StrNum.Length != 0) {
         output.WriteRawTag(10);
-        output.WriteString(Num);
+        output.WriteString(StrNum);
+      }
+      if (LongNum != 0L) {
+        output.WriteRawTag(16);
+        output.WriteInt64(LongNum);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -148,8 +170,11 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (Num.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(Num);
+      if (StrNum.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(StrNum);
+      }
+      if (LongNum != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(LongNum);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -162,8 +187,11 @@ namespace Proto {
       if (other == null) {
         return;
       }
-      if (other.Num.Length != 0) {
-        Num = other.Num;
+      if (other.StrNum.Length != 0) {
+        StrNum = other.StrNum;
+      }
+      if (other.LongNum != 0L) {
+        LongNum = other.LongNum;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -180,7 +208,11 @@ namespace Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            Num = input.ReadString();
+            StrNum = input.ReadString();
+            break;
+          }
+          case 16: {
+            LongNum = input.ReadInt64();
             break;
           }
         }
@@ -198,7 +230,11 @@ namespace Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            Num = input.ReadString();
+            StrNum = input.ReadString();
+            break;
+          }
+          case 16: {
+            LongNum = input.ReadInt64();
             break;
           }
         }

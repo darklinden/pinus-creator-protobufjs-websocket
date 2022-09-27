@@ -1,4 +1,5 @@
 import $protobuf from "protobufjs/minimal.js";
+import Long from "long";
 const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 export const proto = (function() {
@@ -390,7 +391,8 @@ export const proto = (function() {
          * Properties of a LargeNumber.
          * @memberof proto
          * @interface ILargeNumber
-         * @property {string|null} [num] LargeNumber num
+         * @property {string|null} [strNum] LargeNumber strNum
+         * @property {number|Long|null} [longNum] LargeNumber longNum
          */
 
         /**
@@ -409,12 +411,20 @@ export const proto = (function() {
         }
 
         /**
-         * LargeNumber num.
-         * @member {string} num
+         * LargeNumber strNum.
+         * @member {string} strNum
          * @memberof proto.LargeNumber
          * @instance
          */
-        LargeNumber.prototype.num = "";
+        LargeNumber.prototype.strNum = "";
+
+        /**
+         * LargeNumber longNum.
+         * @member {number|Long} longNum
+         * @memberof proto.LargeNumber
+         * @instance
+         */
+        LargeNumber.prototype.longNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
 
         /**
          * Creates a new LargeNumber instance using the specified properties.
@@ -440,8 +450,10 @@ export const proto = (function() {
         LargeNumber.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.num != null && message.hasOwnProperty("num"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.num);
+            if (message.strNum != null && message.hasOwnProperty("strNum"))
+                writer.uint32(/* id 1, wireType 2 =*/10).string(message.strNum);
+            if (message.longNum != null && message.hasOwnProperty("longNum"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.longNum);
             return writer;
         };
 
@@ -477,7 +489,10 @@ export const proto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.num = reader.string();
+                    message.strNum = reader.string();
+                    break;
+                case 2:
+                    message.longNum = reader.int64();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -514,9 +529,12 @@ export const proto = (function() {
         LargeNumber.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.num != null && message.hasOwnProperty("num"))
-                if (!$util.isString(message.num))
-                    return "num: string expected";
+            if (message.strNum != null && message.hasOwnProperty("strNum"))
+                if (!$util.isString(message.strNum))
+                    return "strNum: string expected";
+            if (message.longNum != null && message.hasOwnProperty("longNum"))
+                if (!$util.isInteger(message.longNum) && !(message.longNum && $util.isInteger(message.longNum.low) && $util.isInteger(message.longNum.high)))
+                    return "longNum: integer|Long expected";
             return null;
         };
 
@@ -532,8 +550,17 @@ export const proto = (function() {
             if (object instanceof proto.LargeNumber)
                 return object;
             var message = new proto.LargeNumber();
-            if (object.num != null)
-                message.num = String(object.num);
+            if (object.strNum != null)
+                message.strNum = String(object.strNum);
+            if (object.longNum != null)
+                if ($util.Long)
+                    (message.longNum = $util.Long.fromValue(object.longNum)).unsigned = false;
+                else if (typeof object.longNum === "string")
+                    message.longNum = parseInt(object.longNum, 10);
+                else if (typeof object.longNum === "number")
+                    message.longNum = object.longNum;
+                else if (typeof object.longNum === "object")
+                    message.longNum = new $util.LongBits(object.longNum.low >>> 0, object.longNum.high >>> 0).toNumber();
             return message;
         };
 
@@ -550,10 +577,21 @@ export const proto = (function() {
             if (!options)
                 options = {};
             var object = {};
-            if (options.defaults)
-                object.num = "";
-            if (message.num != null && message.hasOwnProperty("num"))
-                object.num = message.num;
+            if (options.defaults) {
+                object.strNum = "";
+                if ($util.Long) {
+                    var long = new $util.Long(0, 0, false);
+                    object.longNum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
+                } else
+                    object.longNum = options.longs === String ? "0" : 0;
+            }
+            if (message.strNum != null && message.hasOwnProperty("strNum"))
+                object.strNum = message.strNum;
+            if (message.longNum != null && message.hasOwnProperty("longNum"))
+                if (typeof message.longNum === "number")
+                    object.longNum = options.longs === String ? String(message.longNum) : message.longNum;
+                else
+                    object.longNum = options.longs === String ? $util.Long.prototype.toString.call(message.longNum) : options.longs === Number ? new $util.LongBits(message.longNum.low >>> 0, message.longNum.high >>> 0).toNumber() : message.longNum;
             return object;
         };
 

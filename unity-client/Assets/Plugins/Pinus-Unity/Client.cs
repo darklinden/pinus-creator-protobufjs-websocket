@@ -75,7 +75,7 @@ namespace PinusUnity
 
         private void OnError(object sender, ErrorEventArgs e)
         {
-            Utils.L("Pinus Client OnError", Url);
+            Log.E("Pinus Client OnError", Url, e.Message);
             if (!m_ManuallyClosed)
             {
                 m_NetworkHandle.OnError(e.Exception);

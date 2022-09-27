@@ -22,7 +22,7 @@ public static class Pinus
         if (Network != null) Network.SendMessage(requestId, route, msg);
     }
 
-    public static void Request<T>(string route, T msg, Action<T> cb = null) where T : Google.Protobuf.IMessage
+    public static void Request<TSend, TRecv>(string route, TSend msg, Action<TRecv> cb = null) where TSend : Google.Protobuf.IMessage where TRecv : Google.Protobuf.IMessage
     {
         if (Network != null) Network.Request(route, msg, cb);
     }

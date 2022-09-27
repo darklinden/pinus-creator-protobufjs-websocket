@@ -1,6 +1,7 @@
 import { ScheduleOptions, SessionService } from 'pinus';
 import { Application, FrontendSession } from 'pinus';
 
+import Long = require('long');
 import { proto } from "proto-structs";
 import { Structs } from 'struct-routes';
 
@@ -54,9 +55,9 @@ export class Handler {
      * @param  {Object}   session current session object
      */
     async onLargeNumber(msg: any, session: FrontendSession) {
-        console.log(msg.num);
+        console.log(msg);
 
-        const ret = { num: '99999999999999999999' } as proto.ILargeNumber;
+        const ret = { strNum: '99999999999999999999', longNum: Long.fromString('9999999999999') } as proto.ILargeNumber;
 
         // console.log('ret instanceof Structs.foo.Foo.server:', ret instanceof Structs.foo.Foo.server);
 
@@ -70,14 +71,14 @@ export class Handler {
      * @param  {Object}   session current session object
      */
     async onNotifyLargeNumber(msg: any, session: FrontendSession) {
-        console.log(msg.num);
+        console.log(msg);
 
         const sid = session.id;
         const uid = session.uid;
 
         const pingTimer = setTimeout(() => {
 
-            const ret = { num: '99999999999999999999' } as proto.ILargeNumber;
+            const ret = { strNum: '99999999999999999999', longNum: Long.fromString('9999999999999') } as proto.ILargeNumber;
             let opts: ScheduleOptions = {
                 type: 'broadcast',
                 userOptions: {

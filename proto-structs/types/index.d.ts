@@ -1,4 +1,5 @@
 import * as $protobuf from "protobufjs";
+import * as Long from "long";
 // DO NOT EDIT! This is a generated file. Edit the JSDoc in src/*.js instead and run 'npm run types'.
 
 /** Namespace proto. */
@@ -187,8 +188,11 @@ export namespace proto {
     /** Properties of a LargeNumber. */
     interface ILargeNumber {
 
-        /** LargeNumber num */
-        num?: (string|null);
+        /** LargeNumber strNum */
+        strNum?: (string|null);
+
+        /** LargeNumber longNum */
+        longNum?: (number|Long|null);
     }
 
     /** Represents a LargeNumber. */
@@ -200,8 +204,11 @@ export namespace proto {
          */
         constructor(properties?: proto.ILargeNumber);
 
-        /** LargeNumber num. */
-        public num: string;
+        /** LargeNumber strNum. */
+        public strNum: string;
+
+        /** LargeNumber longNum. */
+        public longNum: (number|Long);
 
         /**
          * Creates a new LargeNumber instance using the specified properties.

@@ -432,7 +432,7 @@ namespace PinusUnity
             Client.SendBuffer(Package.Encode(PackageType.Data, m_SendBuffer, offset));
         }
 
-        public void Request<T>(string route, T msg, Action<T> cb = null) where T : Google.Protobuf.IMessage
+        public void Request<TSend, TRecv>(string route, TSend msg, Action<TRecv> cb = null) where TSend : Google.Protobuf.IMessage where TRecv : Google.Protobuf.IMessage
         {
             if (String.IsNullOrEmpty(route))
             {
@@ -442,7 +442,7 @@ namespace PinusUnity
 
             var requestId = GenerateUniqueRequestId();
             SendMessage(requestId, route, msg);
-            if (cb != null) m_RequestCallbackMap.Add(requestId, (e) => cb((T)e));
+            if (cb != null) m_RequestCallbackMap.Add(requestId, (e) => cb((TRecv)e));
             m_RequestRouteMap.Add(requestId, route);
         }
 

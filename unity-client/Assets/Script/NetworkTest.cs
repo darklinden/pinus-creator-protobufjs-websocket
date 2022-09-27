@@ -15,14 +15,19 @@ public class NetworkTest : MonoBehaviour
 
     private void OnNotifyLargeNumber(Proto.LargeNumber e)
     {
-        Log.D(e.Num);
+        Log.D(e.StrNum);
+        Log.D(e.LongNum);
     }
 
     private void OnHandshakeOver(string url)
     {
-        var data = new Proto.LargeNumber { Num = "123456789123456789" };
+        var data = new Proto.LargeNumber
+        {
+            StrNum = "123456789123456789",
+            LongNum = 12345678912,
+        };
 
-        Pinus.Request(Structs.FooRoute.LargeNumber.route, data, d =>
+        Pinus.Request<Proto.LargeNumber, Proto.LargeNumber>(Structs.FooRoute.LargeNumber.route, data, d =>
         {
             Log.D("Response", d);
             Pinus.Notify(Structs.FooRoute.NotifyLargeNumber.route, d);
