@@ -1,0 +1,1 @@
+{"version":3,"file":"MarkRoutes.js","sourceRoot":"","sources":["../../src/MarkRoutes.ts"],"names":[],"mappings":"AAAA,MAAM,UAAU,SAAS,CAAC,KAAa,EAAE,MAAW,EAAE,MAAW;IAC7D,OAAO,UAAU,MAAW,EAAE,IAAY,EAAE,UAAe;QACvD,OAAO,CAAC,GAAG,CAAC,8BAA8B,EAAE,MAAM,EAAE,IAAI,EAAE,UAAU,CAAC,CAAC;IAC1E,CAAC,CAAA;AACL,CAAC"}

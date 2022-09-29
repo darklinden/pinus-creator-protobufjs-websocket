@@ -1,0 +1,7 @@
+import { Cmd } from './Cmd';
+import { RouteBase } from './RouteBase';
+import { proto } from "proto-structs";
+
+export class *RouteName* extends RouteBase {
+    // ------------------- * implement Cmds * -------------------
+}

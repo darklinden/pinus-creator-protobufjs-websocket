@@ -1,19 +1,12 @@
 import { Cmd } from "./Cmd";
 import { RouteBase } from "./RouteBase";
 
-import { BarRoute } from "./BarRoute";
-import { FooRoute } from "./FooRoute";
-import { NumRoute } from "./NumRoute";
+// ------------------- * import routes * -------------------
 
 export class Structs {
 
     // --- group routes begin ---
-private m_BarRoute: BarRoute = null;
-public static get BarRoute(): BarRoute { return this.instance.m_BarRoute; }
-private m_FooRoute: FooRoute = null;
-public static get FooRoute(): FooRoute { return this.instance.m_FooRoute; }
-private m_NumRoute: NumRoute = null;
-public static get NumRoute(): NumRoute { return this.instance.m_NumRoute; }
+    // ------------------- * property routes * -------------------
     // --- group routes end ---
 
     // --- instance begin ---
@@ -25,9 +18,7 @@ public static get NumRoute(): NumRoute { return this.instance.m_NumRoute; }
     // --- instance end ---
 
     constructor() {
-this.m_BarRoute = new BarRoute();
-this.m_FooRoute = new FooRoute();
-this.m_NumRoute = new NumRoute();
+// ------------------- * instantiate routes * -------------------
     }
 
     private _routs: Map<string, Cmd> = null;

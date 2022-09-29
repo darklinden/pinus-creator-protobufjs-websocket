@@ -2,7 +2,7 @@ import { ScheduleOptions, SessionService } from 'pinus';
 import { Application, FrontendSession } from 'pinus';
 
 import { proto } from "proto-structs";
-import { Structs } from 'struct-routes';
+import { MarkRoute, Structs } from 'struct-routes';
 
 export default function (app: Application) {
     return new Handler(app);
@@ -20,6 +20,7 @@ export class Handler {
      * @param  {Object}   msg     request message
      * @param  {Object}   session current session object
      */
+    @MarkRoute('BarRoute', proto.Bar, proto.Foo)
     async onBar(msg: any, session: FrontendSession) {
 
         console.log('msg instanceof Structs.bar.Bar.client:', msg instanceof Structs.bar.Bar.client);
@@ -37,6 +38,7 @@ export class Handler {
      * @param  {Object}   msg     request message
      * @param  {Object}   session current session object
      */
+    @MarkRoute('FooRoute', proto.Foo, proto.Bar)
     async onFoo(msg: any, session: FrontendSession) {
         console.log('msg instanceof Structs.foo.Foo.client:', msg instanceof Structs.foo.Foo.client);
 
@@ -53,6 +55,7 @@ export class Handler {
      * @param  {Object}   msg     request message
      * @param  {Object}   session current session object
      */
+    @MarkRoute('NumRoute', proto.LargeNumber, proto.LargeNumber)
     async onLargeNumber(msg: any, session: FrontendSession) {
         console.log(msg);
 
@@ -73,6 +76,7 @@ export class Handler {
      * @param  {Object}   msg     request message
      * @param  {Object}   session current session object
      */
+    @MarkRoute('NumRoute', proto.LargeNumber, proto.LargeNumber)
     async onNotifyLargeNumber(msg: any, session: FrontendSession) {
         console.log(msg);
 
