@@ -24,12 +24,13 @@ namespace Proto {
     static LargeNumberReflection() {
       byte[] descriptorData = global::System.Convert.FromBase64String(
           string.Concat(
-            "ChFMYXJnZU51bWJlci5wcm90bxIFcHJvdG8iMAoLTGFyZ2VOdW1iZXISDwoH",
-            "c3RyX251bRgBIAEoCRIQCghsb25nX251bRgCIAEoA2IGcHJvdG8z"));
+            "ChFMYXJnZU51bWJlci5wcm90bxIFcHJvdG8iSgoLTGFyZ2VOdW1iZXISEQoJ",
+            "SW50TnVtYmVyGAEgASgFEhIKCkxvbmdOdW1iZXIYAiABKAMSFAoMU3RyaW5n",
+            "TnVtYmVyGAMgASgJYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
-            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LargeNumber), global::Proto.LargeNumber.Parser, new[]{ "StrNum", "LongNum" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::Proto.LargeNumber), global::Proto.LargeNumber.Parser, new[]{ "IntNumber", "LongNumber", "StringNumber" }, null, null, null, null)
           }));
     }
     #endregion
@@ -65,8 +66,9 @@ namespace Proto {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public LargeNumber(LargeNumber other) : this() {
-      strNum_ = other.strNum_;
-      longNum_ = other.longNum_;
+      intNumber_ = other.intNumber_;
+      longNumber_ = other.longNumber_;
+      stringNumber_ = other.stringNumber_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -75,25 +77,36 @@ namespace Proto {
       return new LargeNumber(this);
     }
 
-    /// <summary>Field number for the "str_num" field.</summary>
-    public const int StrNumFieldNumber = 1;
-    private string strNum_ = "";
+    /// <summary>Field number for the "IntNumber" field.</summary>
+    public const int IntNumberFieldNumber = 1;
+    private int intNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string StrNum {
-      get { return strNum_; }
+    public int IntNumber {
+      get { return intNumber_; }
       set {
-        strNum_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+        intNumber_ = value;
       }
     }
 
-    /// <summary>Field number for the "long_num" field.</summary>
-    public const int LongNumFieldNumber = 2;
-    private long longNum_;
+    /// <summary>Field number for the "LongNumber" field.</summary>
+    public const int LongNumberFieldNumber = 2;
+    private long longNumber_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public long LongNum {
-      get { return longNum_; }
+    public long LongNumber {
+      get { return longNumber_; }
       set {
-        longNum_ = value;
+        longNumber_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "StringNumber" field.</summary>
+    public const int StringNumberFieldNumber = 3;
+    private string stringNumber_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string StringNumber {
+      get { return stringNumber_; }
+      set {
+        stringNumber_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
       }
     }
 
@@ -110,16 +123,18 @@ namespace Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (StrNum != other.StrNum) return false;
-      if (LongNum != other.LongNum) return false;
+      if (IntNumber != other.IntNumber) return false;
+      if (LongNumber != other.LongNumber) return false;
+      if (StringNumber != other.StringNumber) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
-      if (StrNum.Length != 0) hash ^= StrNum.GetHashCode();
-      if (LongNum != 0L) hash ^= LongNum.GetHashCode();
+      if (IntNumber != 0) hash ^= IntNumber.GetHashCode();
+      if (LongNumber != 0L) hash ^= LongNumber.GetHashCode();
+      if (StringNumber.Length != 0) hash ^= StringNumber.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -136,13 +151,17 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (StrNum.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(StrNum);
+      if (IntNumber != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(IntNumber);
       }
-      if (LongNum != 0L) {
+      if (LongNumber != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(LongNum);
+        output.WriteInt64(LongNumber);
+      }
+      if (StringNumber.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(StringNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -153,13 +172,17 @@ namespace Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (StrNum.Length != 0) {
-        output.WriteRawTag(10);
-        output.WriteString(StrNum);
+      if (IntNumber != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(IntNumber);
       }
-      if (LongNum != 0L) {
+      if (LongNumber != 0L) {
         output.WriteRawTag(16);
-        output.WriteInt64(LongNum);
+        output.WriteInt64(LongNumber);
+      }
+      if (StringNumber.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(StringNumber);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -170,11 +193,14 @@ namespace Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
-      if (StrNum.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(StrNum);
+      if (IntNumber != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(IntNumber);
       }
-      if (LongNum != 0L) {
-        size += 1 + pb::CodedOutputStream.ComputeInt64Size(LongNum);
+      if (LongNumber != 0L) {
+        size += 1 + pb::CodedOutputStream.ComputeInt64Size(LongNumber);
+      }
+      if (StringNumber.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(StringNumber);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -187,11 +213,14 @@ namespace Proto {
       if (other == null) {
         return;
       }
-      if (other.StrNum.Length != 0) {
-        StrNum = other.StrNum;
+      if (other.IntNumber != 0) {
+        IntNumber = other.IntNumber;
       }
-      if (other.LongNum != 0L) {
-        LongNum = other.LongNum;
+      if (other.LongNumber != 0L) {
+        LongNumber = other.LongNumber;
+      }
+      if (other.StringNumber.Length != 0) {
+        StringNumber = other.StringNumber;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -207,12 +236,16 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            StrNum = input.ReadString();
+          case 8: {
+            IntNumber = input.ReadInt32();
             break;
           }
           case 16: {
-            LongNum = input.ReadInt64();
+            LongNumber = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            StringNumber = input.ReadString();
             break;
           }
         }
@@ -229,12 +262,16 @@ namespace Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            StrNum = input.ReadString();
+          case 8: {
+            IntNumber = input.ReadInt32();
             break;
           }
           case 16: {
-            LongNum = input.ReadInt64();
+            LongNumber = input.ReadInt64();
+            break;
+          }
+          case 26: {
+            StringNumber = input.ReadString();
             break;
           }
         }

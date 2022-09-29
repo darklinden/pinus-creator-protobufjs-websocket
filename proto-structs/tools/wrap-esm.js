@@ -14,8 +14,7 @@ let lines = original.split('\n');
 // remove first comment and strict and last module.exports =
 lines = lines.splice(10, lines.length - 12);
 lines.unshift(
-    'import $protobuf from "protobufjs/minimal.js";',
-    'import Long from "long";',
+    'import $protobuf from "protobufjs-nolong/minimal.js";',
     'const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;'
 );
 

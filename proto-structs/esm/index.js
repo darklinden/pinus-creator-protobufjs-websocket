@@ -1,5 +1,4 @@
-import $protobuf from "protobufjs/minimal.js";
-import Long from "long";
+import $protobuf from "protobufjs-nolong/minimal.js";
 const $Reader = $protobuf.Reader, $Writer = $protobuf.Writer, $util = $protobuf.util;
 
 export const proto = (function() {
@@ -391,8 +390,9 @@ export const proto = (function() {
          * Properties of a LargeNumber.
          * @memberof proto
          * @interface ILargeNumber
-         * @property {string|null} [strNum] LargeNumber strNum
-         * @property {number|Long|null} [longNum] LargeNumber longNum
+         * @property {number|null} [IntNumber] LargeNumber IntNumber
+         * @property {number|null} [LongNumber] LargeNumber LongNumber
+         * @property {string|null} [StringNumber] LargeNumber StringNumber
          */
 
         /**
@@ -411,20 +411,28 @@ export const proto = (function() {
         }
 
         /**
-         * LargeNumber strNum.
-         * @member {string} strNum
+         * LargeNumber IntNumber.
+         * @member {number} IntNumber
          * @memberof proto.LargeNumber
          * @instance
          */
-        LargeNumber.prototype.strNum = "";
+        LargeNumber.prototype.IntNumber = 0;
 
         /**
-         * LargeNumber longNum.
-         * @member {number|Long} longNum
+         * LargeNumber LongNumber.
+         * @member {number} LongNumber
          * @memberof proto.LargeNumber
          * @instance
          */
-        LargeNumber.prototype.longNum = $util.Long ? $util.Long.fromBits(0,0,false) : 0;
+        LargeNumber.prototype.LongNumber = 0;
+
+        /**
+         * LargeNumber StringNumber.
+         * @member {string} StringNumber
+         * @memberof proto.LargeNumber
+         * @instance
+         */
+        LargeNumber.prototype.StringNumber = "";
 
         /**
          * Creates a new LargeNumber instance using the specified properties.
@@ -450,10 +458,12 @@ export const proto = (function() {
         LargeNumber.encode = function encode(message, writer) {
             if (!writer)
                 writer = $Writer.create();
-            if (message.strNum != null && message.hasOwnProperty("strNum"))
-                writer.uint32(/* id 1, wireType 2 =*/10).string(message.strNum);
-            if (message.longNum != null && message.hasOwnProperty("longNum"))
-                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.longNum);
+            if (message.IntNumber != null && message.hasOwnProperty("IntNumber"))
+                writer.uint32(/* id 1, wireType 0 =*/8).int32(message.IntNumber);
+            if (message.LongNumber != null && message.hasOwnProperty("LongNumber"))
+                writer.uint32(/* id 2, wireType 0 =*/16).int64(message.LongNumber);
+            if (message.StringNumber != null && message.hasOwnProperty("StringNumber"))
+                writer.uint32(/* id 3, wireType 2 =*/26).string(message.StringNumber);
             return writer;
         };
 
@@ -489,10 +499,13 @@ export const proto = (function() {
                 var tag = reader.uint32();
                 switch (tag >>> 3) {
                 case 1:
-                    message.strNum = reader.string();
+                    message.IntNumber = reader.int32();
                     break;
                 case 2:
-                    message.longNum = reader.int64();
+                    message.LongNumber = reader.int64();
+                    break;
+                case 3:
+                    message.StringNumber = reader.string();
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -529,12 +542,15 @@ export const proto = (function() {
         LargeNumber.verify = function verify(message) {
             if (typeof message !== "object" || message === null)
                 return "object expected";
-            if (message.strNum != null && message.hasOwnProperty("strNum"))
-                if (!$util.isString(message.strNum))
-                    return "strNum: string expected";
-            if (message.longNum != null && message.hasOwnProperty("longNum"))
-                if (!$util.isInteger(message.longNum) && !(message.longNum && $util.isInteger(message.longNum.low) && $util.isInteger(message.longNum.high)))
-                    return "longNum: integer|Long expected";
+            if (message.IntNumber != null && message.hasOwnProperty("IntNumber"))
+                if (!$util.isInteger(message.IntNumber))
+                    return "IntNumber: integer expected";
+            if (message.LongNumber != null && message.hasOwnProperty("LongNumber"))
+                if (!$util.isInteger(message.LongNumber) && !(message.LongNumber && $util.isInteger(message.LongNumber.low) && $util.isInteger(message.LongNumber.high)))
+                    return "LongNumber: integer|Long expected";
+            if (message.StringNumber != null && message.hasOwnProperty("StringNumber"))
+                if (!$util.isString(message.StringNumber))
+                    return "StringNumber: string expected";
             return null;
         };
 
@@ -550,17 +566,19 @@ export const proto = (function() {
             if (object instanceof proto.LargeNumber)
                 return object;
             var message = new proto.LargeNumber();
-            if (object.strNum != null)
-                message.strNum = String(object.strNum);
-            if (object.longNum != null)
+            if (object.IntNumber != null)
+                message.IntNumber = object.IntNumber | 0;
+            if (object.LongNumber != null)
                 if ($util.Long)
-                    (message.longNum = $util.Long.fromValue(object.longNum)).unsigned = false;
-                else if (typeof object.longNum === "string")
-                    message.longNum = parseInt(object.longNum, 10);
-                else if (typeof object.longNum === "number")
-                    message.longNum = object.longNum;
-                else if (typeof object.longNum === "object")
-                    message.longNum = new $util.LongBits(object.longNum.low >>> 0, object.longNum.high >>> 0).toNumber();
+                    (message.LongNumber = $util.Long.fromValue(object.LongNumber)).unsigned = false;
+                else if (typeof object.LongNumber === "string")
+                    message.LongNumber = parseInt(object.LongNumber, 10);
+                else if (typeof object.LongNumber === "number")
+                    message.LongNumber = object.LongNumber;
+                else if (typeof object.LongNumber === "object")
+                    message.LongNumber = new $util.LongBits(object.LongNumber.low >>> 0, object.LongNumber.high >>> 0).toNumber();
+            if (object.StringNumber != null)
+                message.StringNumber = String(object.StringNumber);
             return message;
         };
 
@@ -578,20 +596,19 @@ export const proto = (function() {
                 options = {};
             var object = {};
             if (options.defaults) {
-                object.strNum = "";
-                if ($util.Long) {
-                    var long = new $util.Long(0, 0, false);
-                    object.longNum = options.longs === String ? long.toString() : options.longs === Number ? long.toNumber() : long;
-                } else
-                    object.longNum = options.longs === String ? "0" : 0;
+                object.IntNumber = 0;
+                object.LongNumber = 0;
+                object.StringNumber = "";
             }
-            if (message.strNum != null && message.hasOwnProperty("strNum"))
-                object.strNum = message.strNum;
-            if (message.longNum != null && message.hasOwnProperty("longNum"))
-                if (typeof message.longNum === "number")
-                    object.longNum = options.longs === String ? String(message.longNum) : message.longNum;
+            if (message.IntNumber != null && message.hasOwnProperty("IntNumber"))
+                object.IntNumber = message.IntNumber;
+            if (message.LongNumber != null && message.hasOwnProperty("LongNumber"))
+                if (typeof message.LongNumber === "number")
+                    object.LongNumber = options.longs === String ? String(message.LongNumber) : message.LongNumber;
                 else
-                    object.longNum = options.longs === String ? $util.Long.prototype.toString.call(message.longNum) : options.longs === Number ? new $util.LongBits(message.longNum.low >>> 0, message.longNum.high >>> 0).toNumber() : message.longNum;
+                    object.LongNumber = options.longs === String ? $util.Long.prototype.toString.call(message.LongNumber) : options.longs === Number ? new $util.LongBits(message.LongNumber.low >>> 0, message.LongNumber.high >>> 0).toNumber() : message.LongNumber;
+            if (message.StringNumber != null && message.hasOwnProperty("StringNumber"))
+                object.StringNumber = message.StringNumber;
             return object;
         };
 

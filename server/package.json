@@ -19,10 +19,9 @@
         "@types/long": "^5.0.0",
         "@types/node": "^12.7.12",
         "bluebird": "^3.5.1",
-        "long": "^5.2.0",
         "pinus": "1.6.3",
         "proto-structs": "file:../proto-structs",
-        "protobufjs": "^6.11.2",
+        "protobufjs-nolong": "^6.8.8",
         "reflect-metadata": "^0.1.10",
         "source-map-support": "^0.5.0",
         "struct-routes": "file:../struct-routes"
