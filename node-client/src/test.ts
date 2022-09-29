@@ -21,7 +21,7 @@ class NetworkTest {
 
     onConnected() {
         const big = JSBI.BigInt("75643564363473453456342378564387956906736546456235345");
-        const msg: proto.ILargeNumber = { num: big.toString(10) };
+        const msg: proto.ILargeNumber = { IntNumber: big.toString(10), LongNumber: 123456789 };
 
         // const msg: proto.IFoo = { foo: 2048 };
         // pinus.request(Structs.login.Guest.route, msg as any, data => {

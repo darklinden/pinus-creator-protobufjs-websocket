@@ -20,6 +20,7 @@ namespace PinusUnity
         {
             GameObject go = GameObject.Find("/[Pinus-Event-Manager]");
             if (go == null) go = new GameObject("[Pinus-Event-Manager]");
+            UnityEngine.Object.DontDestroyOnLoad(go);
             _instance = go.GetComponent<EventBus>();
             if (_instance == null) _instance = go.AddComponent<EventBus>();
         }

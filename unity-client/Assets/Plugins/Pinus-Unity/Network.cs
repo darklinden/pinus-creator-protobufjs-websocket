@@ -133,6 +133,7 @@ namespace PinusUnity
             ProcessPackage(data);
 
             // new package arrived, update the heartbeat timeout
+            Utils.L("OnRecv RenewHeartbeatTimeout");
             RenewHeartbeatTimeout();
         }
 
@@ -220,7 +221,7 @@ namespace PinusUnity
             EventBus.Instance.HandshakeOver(Url);
         }
 
-        void Heartbeat()
+        void OnHeartbeat()
         {
             if (HeartbeatInterval == 0)
             {
@@ -250,6 +251,7 @@ namespace PinusUnity
                 if (HeartbeatPassed > HeartbeatInterval)
                 {
                     Client.SendBuffer(Package.Encode(PackageType.Heartbeat));
+                    Utils.L("SendHeartbeat RenewHeartbeatTimeout");
                     RenewHeartbeatTimeout();
                 }
                 return;
@@ -323,8 +325,8 @@ namespace PinusUnity
                 {
                     m_RequestCallbackMap.Remove(id);
                     cb(msg);
+                    return;
                 }
-                return;
             }
 
             EventDispatcher.Dispatch(routeStr, msg);
@@ -361,7 +363,7 @@ namespace PinusUnity
                     OnHandshake(bytes, offset, length);
                     break;
                 case PackageType.Heartbeat:
-                    Heartbeat();
+                    OnHeartbeat();
                     break;
                 case PackageType.Data:
                     OnData(bytes, offset, length);

@@ -9,7 +9,7 @@ namespace PinusUnity
         protected float m_ConnectTimeout = 3;
         public float ConnectTimeout { get { return m_ConnectTimeout; } set { m_ConnectTimeout = value; } }
 
-        public bool IsConnected = false;
+        public bool IsConnected { get { return m_Ws != null && m_Ws.ReadyState == WebSocketState.Open; } }
         public string Url = null;
 
         protected bool m_ManuallyClosed = false;
@@ -29,7 +29,6 @@ namespace PinusUnity
 
             m_Ws = null;
             m_ManuallyClosed = false;
-            IsConnected = false;
 
             InitSocket();
         }
@@ -63,7 +62,6 @@ namespace PinusUnity
         {
             m_ConnectPassed = 0;
             EventBus.Instance.OnFrameUpdated -= OnFrameUpdated;
-            IsConnected = true;
             Utils.L("Pinus Client OnOpen", Url);
             m_NetworkHandle.OnOpen();
         }
@@ -135,7 +133,6 @@ namespace PinusUnity
         public void Close()
         {
             m_ManuallyClosed = true;
-            IsConnected = false;
             m_ConnectPassed = 0;
             EventBus.Instance.OnFrameUpdated -= OnFrameUpdated;
 
